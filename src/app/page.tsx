@@ -1,28 +1,25 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <section className="text-center">
+      <div className="flex justify-center mb-6">
+        {/* Example profile photo */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/profile.jpg"
+          alt="Profile photo of David"
+          width={200}
+          height={200}
+          className="rounded-full shadow-lg"
           priority
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Welcome to my page{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              Hope you like it :3
-            </code>
-            .
-          </li>
+      </div>
 
-        </ol>
-      </main>
-    </div>
+      <h1 className="text-4xl font-bold mb-4">Hi, I’m David</h1>
+      <p className="text-lg">
+        I’m passionate about <span className="font-semibold">design</span> and
+        enjoy building projects that blend technology and creativity.
+      </p>
+    </section>
   );
 }
