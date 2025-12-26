@@ -23,7 +23,7 @@ export default function ProjectsPage() {
         "Utilized Dart for front-end and Flask for local server processing.",
         "Leveraged Python for backend scripting and integrated C++ for performance-critical tasks."
       ],
-      image: "https://via.placeholder.com/400x250?text=CooCoo+Project" 
+      image: "/images/CooCoo.png" 
     },
     { 
       id: "icar",
@@ -31,7 +31,7 @@ export default function ProjectsPage() {
       tech: "Arduino, C++", 
       link: "#",
       description: ["An autonomous vehicle prototype capable of obstacle avoidance and line following."],
-      image: "https://via.placeholder.com/400x250?text=iCar+Project" 
+      image: "" 
     },
     { 
       id: "scanbites",
@@ -39,31 +39,31 @@ export default function ProjectsPage() {
       tech: "AI, Flutter, Firebase", 
       link: "https://devpost.com/software/scanbite",
       description: ["A mobile app that scans food barcodes to provide nutritional analysis and health recommendations."],
-      image: "https://via.placeholder.com/400x250?text=ScanBites" 
+      image: "/images/ScanBites.png" 
     },
     { 
       id: "bodysync",
       name: "BodySync", 
       tech: "Python, MediaPipe, OpenCV, FLASK, HTML", 
-      link: "#",
+      link: "https://github.com/davidshxm/BodySync",
       description: ["Computer vision software that analyzes posture and movement in real-time for physical therapy."],
-      image: "https://via.placeholder.com/400x250?text=BodySync" 
+      image: "/images/BodySync.png" 
     },
     { 
-      id: "feelarm",
-      name: "FeelArm", 
+      id: "synapse",
+      name: "Synapse", 
       tech: "Autodesk Fusion, Arduino, C++", 
-      link: "#",
+      link: "https://github.com/davidshxm/Bme-261-Haptic-Feedback-Arm-code",
       description: ["A haptic feedback robotic arm designed to simulate touch sensations for VR environments."],
-      image: "https://github.com/davidshxm/Bme-261-Haptic-Feedback-Arm-code" 
+      image: "/images/Synapse.png" 
     },
     { 
       id: "pushprogress",
       name: "PushProgress", 
       tech: "Solidworks, Arduino, C++", 
-      link: "#",
+      link: "https://github.com/davidshxm/pushProgress",
       description: ["A gym tracking device that automatically counts reps and sets for weightlifting machines."],
-      image: "https://github.com/davidshxm/pushProgress" 
+      image: "/images/PushProgress.png" 
     },
   ];
 
@@ -98,7 +98,6 @@ export default function ProjectsPage() {
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {projects.map((project) => (
             <li key={project.id}>
-              {/* 3. Attach the onClick handler here */}
               <a 
                 href={`#${project.id}`} 
                 onClick={(e) => handleScroll(e, project.id)}
@@ -121,16 +120,23 @@ export default function ProjectsPage() {
           >
             <div className="flex flex-col md:flex-row gap-8 border-b pb-12 border-gray-200">
               
-              {/* Image Section */}
-              <div className="w-full md:w-1/2 flex-shrink-0">
-                <div className="overflow-hidden rounded-xl shadow-lg border border-gray-100">
-                  <img 
-                    src={project.image} 
-                    alt={`${project.name} screenshot`} 
-                    className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                  />
+              {/* Image Section*/}
+              {project.image ? (
+                <div className="w-full md:w-1/2 flex-shrink-0">
+                  <div className="overflow-hidden rounded-xl shadow-lg border border-gray-100">
+                    <img 
+                      src={project.image} 
+                      alt={`${project.name} screenshot`} 
+                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* OPTIONAL: Render a placeholder if no image exists to keep layout consistent */
+                <div className="w-full md:w-1/2 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-xl h-64 border border-gray-200">
+                  <span className="text-gray-400 font-medium">No Image Available</span>
+                </div>
+              )}
 
               {/* Text Section */}
               <div className="w-full md:w-1/2 flex flex-col justify-center">
