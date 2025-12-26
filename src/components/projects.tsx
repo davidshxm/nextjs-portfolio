@@ -1,28 +1,28 @@
+"use client"; // 1. Ensure this is at the top since we are using event handlers
+
 import React from 'react';
 
-// 1. Updated Interface to include description, image, and a unique ID
 interface Project {
   id: string;
   name: string;
   tech: string;
   link: string;
-  description: string []; // Brief description of the project
-  image: string; // URL to the image
+  description: string[]; 
+  image: string; 
 }
 
 export default function ProjectsPage() {
-  // 2. Updated Data with descriptions and placeholder images
-  // Replace the 'image' strings with your actual file paths (e.g., "/images/coocoo.png")
   const projects: Project[] = [
     { 
       id: "coocoo",
       name: "CooCoo", 
       tech: "Flutter, Flask, Python", 
       link: "https://devpost.com/software/coocoo",
-      description: ["Developed an app that detects and flags potential misinformation in real-time conversations, informing users and enhancing clarity.",
-                      'Utilized Dart for front-end development and Flask to set up a local server for information retrieval and processing.',
-                      'Leveraged Python for backend scripting, data manipulation, and API development, and integrated C++ for performance critical tasks, enabling efficient processing and optimized performance.'
-                    ],
+      description: [
+        "Developed an app that detects and flags potential misinformation in real-time conversations.",
+        "Utilized Dart for front-end and Flask for local server processing.",
+        "Leveraged Python for backend scripting and integrated C++ for performance-critical tasks."
+      ],
       image: "https://via.placeholder.com/400x250?text=CooCoo+Project" 
     },
     { 
@@ -30,9 +30,7 @@ export default function ProjectsPage() {
       name: "iCar", 
       tech: "Arduino, C++", 
       link: "#",
-      description: ["An autonomous vehicle prototype capable of obstacle avoidance and line following.",
-
-      ],
+      description: ["An autonomous vehicle prototype capable of obstacle avoidance and line following."],
       image: "https://via.placeholder.com/400x250?text=iCar+Project" 
     },
     { 
@@ -57,7 +55,7 @@ export default function ProjectsPage() {
       tech: "Autodesk Fusion, Arduino, C++", 
       link: "#",
       description: ["A haptic feedback robotic arm designed to simulate touch sensations for VR environments."],
-      image: "https://via.placeholder.com/400x250?text=FeelArm" 
+      image: "https://github.com/davidshxm/Bme-261-Haptic-Feedback-Arm-code" 
     },
     { 
       id: "pushprogress",
@@ -65,12 +63,31 @@ export default function ProjectsPage() {
       tech: "Solidworks, Arduino, C++", 
       link: "#",
       description: ["A gym tracking device that automatically counts reps and sets for weightlifting machines."],
-      image: "https://via.placeholder.com/400x250?text=PushProgress" 
+      image: "https://github.com/davidshxm/pushProgress" 
     },
   ];
 
+  // 2. Add the Smooth Scroll Function
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
+    e.preventDefault(); // Stop the default "jump"
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80; // Adjust this if the navbar covers the title
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div id="projects" className="max-w-4xl mx-auto p-6 pt-20">
+      
       <h1 className="text-4xl font-bold mb-8 text-gray-900">Projects Portfolio</h1>
 
       {/* --- Table of Contents --- */}
@@ -81,9 +98,11 @@ export default function ProjectsPage() {
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
           {projects.map((project) => (
             <li key={project.id}>
+              {/* 3. Attach the onClick handler here */}
               <a 
                 href={`#${project.id}`} 
-                className="flex items-center text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2 rounded transition-colors"
+                onClick={(e) => handleScroll(e, project.id)}
+                className="flex items-center text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2 rounded transition-colors cursor-pointer"
               >
                 <span className="mr-2">🔹</span> {project.name}
               </a>
@@ -98,7 +117,7 @@ export default function ProjectsPage() {
           <section 
             key={project.id} 
             id={project.id} 
-            className="scroll-mt-8 group" // scroll-mt ensures the header doesn't cover the title when jumping
+            className="scroll-mt-24 group" 
           >
             <div className="flex flex-col md:flex-row gap-8 border-b pb-12 border-gray-200">
               
@@ -125,7 +144,6 @@ export default function ProjectsPage() {
                   </span>
                 </div>
 
-                {/* UPDATED: Rendering the list */}
                 <ul className="list-disc pl-5 space-y-2 text-gray-600 mb-6 leading-relaxed">
                   {project.description.map((point, index) => (
                     <li key={index}>{point}</li>
@@ -133,10 +151,19 @@ export default function ProjectsPage() {
                 </ul>
 
                 <div>
-                  <a href={project.link} className="...">
-                    {/* ... button code ... */}
+                  <a 
+                    href={project.link} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-md"
+                  >
+                    View Project 
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </a>
                 </div>
+
               </div>
             </div>
           </section>

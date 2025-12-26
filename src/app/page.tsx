@@ -8,9 +8,7 @@ import ContactPage from "@/components/contact";
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
-      
-      {/* --- HERO SECTION (The code you wrote) --- */}
-      {/* I added id="home" so a 'Home' button can scroll here */}
+    
       <section id="home" className="flex flex-col items-center justify-center py-24 bg-white">
         <div className="mb-8 relative">
           {/* Example profile photo */}
