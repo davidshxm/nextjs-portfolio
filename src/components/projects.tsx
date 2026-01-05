@@ -26,12 +26,20 @@ export default function ProjectsPage() {
       image: "/images/CooCoo.png" 
     },
     { 
-      id: "icar",
-      name: "iCar", 
-      tech: "Arduino, C++", 
-      link: "#",
-      description: ["An autonomous vehicle prototype capable of obstacle avoidance and line following."],
-      image: "" 
+      id: "bodysync",
+      name: "BodySync", 
+      tech: "Python, MediaPipe, OpenCV, FLASK, HTML", 
+      link: "https://github.com/davidshxm/BodySync",
+      description: ["Computer vision software that analyzes posture and movement in real-time for physical therapy."],
+      image: "/images/BodySync.png" 
+    },
+    { 
+      id: "qkdKit",
+      name: "Quantum Key Distribution Kit", 
+      tech: "Arduino, C++, PCB", 
+      link: "https://github.com/davidshxm/QKDKit",
+      description: ["A quantum key distribution toolkit for secure communication protocols."],
+      image: "/images/QKDKit.jpg" 
     },
     { 
       id: "scanbites",
@@ -40,14 +48,6 @@ export default function ProjectsPage() {
       link: "https://devpost.com/software/scanbite",
       description: ["A mobile app that scans food barcodes to provide nutritional analysis and health recommendations."],
       image: "/images/ScanBites.png" 
-    },
-    { 
-      id: "bodysync",
-      name: "BodySync", 
-      tech: "Python, MediaPipe, OpenCV, FLASK, HTML", 
-      link: "https://github.com/davidshxm/BodySync",
-      description: ["Computer vision software that analyzes posture and movement in real-time for physical therapy."],
-      image: "/images/BodySync.png" 
     },
     { 
       id: "synapse",
@@ -64,6 +64,14 @@ export default function ProjectsPage() {
       link: "https://github.com/davidshxm/pushProgress",
       description: ["A gym tracking device that automatically counts reps and sets for weightlifting machines."],
       image: "/images/PushProgress.png" 
+    },
+    { 
+      id: "icar",
+      name: "iCar", 
+      tech: "Arduino, C++", 
+      link: "https://docs.google.com/document/d/1EJhNokKSmujg23n0-Mlz_YfAVpEVyQCotCoprlqSqf0/edit?usp=sharing",
+      description: ["An autonomous vehicle prototype capable of obstacle avoidance and line following."],
+      image: "/images/ICar.png" 
     },
   ];
 
@@ -88,7 +96,7 @@ export default function ProjectsPage() {
   return (
     <div id="projects" className="max-w-4xl mx-auto p-6 pt-20">
       
-      <h1 className="text-4xl font-bold mb-8 text-gray-900">Projects Portfolio</h1>
+      <h1 className="text-4xl font-bold mb-8 text-blue-500">Projects Portfolio</h1>
 
       {/* --- Table of Contents --- */}
       <nav className="mb-12 p-6 bg-gray-50 rounded-xl border border-gray-200">
@@ -140,7 +148,7 @@ export default function ProjectsPage() {
 
               {/* Text Section */}
               <div className="w-full md:w-1/2 flex flex-col justify-center">
-                <h3 className="text-3xl font-bold text-gray-800 mb-3">
+                <h3 className="text-3xl font-bold text-blue-400 mb-3">
                   {project.name}
                 </h3>
                 
@@ -150,7 +158,7 @@ export default function ProjectsPage() {
                   </span>
                 </div>
 
-                <ul className="list-disc pl-5 space-y-2 text-gray-600 mb-6 leading-relaxed">
+                <ul className="list-disc pl-5 space-y-2 text-gray-300 mb-6 leading-relaxed">
                   {project.description.map((point, index) => (
                     <li key={index}>{point}</li>
                   ))}
