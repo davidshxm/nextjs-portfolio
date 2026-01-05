@@ -14,7 +14,7 @@ export default function Home() {
           {/* Example profile photo */}
           <div className="w-48 h-48 relative overflow-hidden rounded-full shadow-xl border-4 border-gray-100">
              <Image
-              src="/images/profile.jpg" // Make sure this matches your file path in public/images/
+              src="/images/HeaderImage.JPG" // Make sure this matches your file path in public/images/
               alt="Profile photo of David"
               fill
               className="object-cover"
