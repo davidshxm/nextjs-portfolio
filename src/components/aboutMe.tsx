@@ -25,7 +25,7 @@ export default function AboutMe() {
           {/* 2. Bio Text */}
           <div className="flex-1 text-center md:text-left">
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-              Hello, I'm <span className="text-blue-600">David</span>
+              Hello, I&apos;m <span className="text-blue-600">David</span>
             </h3>
             
             <p className="text-gray-600 leading-relaxed mb-6">
@@ -38,7 +38,7 @@ export default function AboutMe() {
             </p>
 
             <p className="text-gray-600 leading-relaxed mb-6">
-              When I'm not coding, I'm likely arranging new guitar covers, singing, or 
+              When I&apos;m not coding, I&apos;m likely arranging new guitar covers, singing, or 
               staying active through sports. I believe maintaining a creative and 
               active lifestyle keeps my problem-solving skills sharp and my perspective fresh.
             </p>

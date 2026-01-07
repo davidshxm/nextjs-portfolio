@@ -31,7 +31,7 @@ export default function NavBar() {
           <div className="flex-shrink-0">
             <a 
               href="#" 
-              onClick={(e) => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-xl font-bold text-gray-800 tracking-tight"
             >
               My<span className="text-blue-600">Portfolio</span>
