@@ -1,5 +1,6 @@
-import profile from 'public/DavidShim.jpeg';
-import Image from "next/image"; // <--- No curly braces
+import Image from "next/image"; 
+import myProfilePic from '../assets/DavidShim.jpeg';
+
 export default function AboutMe() {
   return (
     <section id="about" className="py-20 bg-white">
@@ -13,15 +14,21 @@ export default function AboutMe() {
           {/* 1. Profile Image */}
           <div className="w-48 h-48 md:w-64 md:h-64 relative flex-shrink-0">
             
-            {/* Decorative Background Blob (Offset) */}
-            <div className="absolute inset-0 bg-blue-100 rounded-full transform translate-x-3 translate-y-3"></div>
+            {/* Decorative Background Blob (Offset to the right) */}
+            <div className="absolute inset-0 bg-blue-100 rounded-full transform translate-x-4 translate-y-4"></div>
             
-            {/* ACTUAL IMAGE (Add this) */}
-            <Image
-              src={profile}
-              alt="David's Profile"
-              placeholder="blur" // Adds a cool blur effect while loading
-            />
+            {/* The Image Container */}
+            {/* We use a relative div here to clip the image into a circle and add the white border */}
+            <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-sm">
+              <Image
+                src={myProfilePic}
+                alt="David's Profile"
+                placeholder="blur"
+                fill                  // 1. Makes image fill the parent container
+                className="object-cover" // 2. Ensures the image crops, doesn't stretch
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // 3. Optimization for performance
+              />
+            </div>
           </div>
 
           {/* 2. Bio Text */}

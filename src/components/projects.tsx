@@ -1,6 +1,7 @@
 "use client"; 
 
 import React, { useState, useMemo } from 'react';
+import Image from "next/image";
 
 interface Project {
   id: string;
@@ -174,19 +175,20 @@ export default function ProjectsPage() {
                 {/* Image Section*/}
                 {project.image ? (
                   <div className="w-full md:w-1/2 flex-shrink-0">
-                    <div className="overflow-hidden rounded-xl shadow-lg border border-gray-100">
-                      <img 
+                    <div className="relative h-64 overflow-hidden rounded-xl shadow-lg border border-gray-100">
+                      {/* NOTE: We added 'relative' to the div above. 
+                        Next.js Image with 'fill' needs a relative parent to know how big to be.
+                      */}
+                      <Image 
                         src={project.image} 
                         alt={`${project.name} screenshot`} 
-                        className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                        fill 
+                        className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 50vw" 
                       />
                     </div>
                   </div>
-                ) : (
-                  <div className="w-full md:w-1/2 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-xl h-64 border border-gray-200">
-                    <span className="text-gray-400 font-medium">No Image Available</span>
-                  </div>
-                )}
+                ) : null}
 
                 {/* Text Section */}
                 <div className="w-full md:w-1/2 flex flex-col justify-center">
