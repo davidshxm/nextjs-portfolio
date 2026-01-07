@@ -1,6 +1,6 @@
-"use client"; // 1. Ensure this is at the top since we are using event handlers
+"use client"; 
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 
 interface Project {
   id: string;
@@ -12,6 +12,9 @@ interface Project {
 }
 
 export default function ProjectsPage() {
+  // 1. State for managing selected filters
+  const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
+
   const projects: Project[] = [
     { 
       id: "coocoo",
@@ -28,7 +31,7 @@ export default function ProjectsPage() {
     { 
       id: "bodysync",
       name: "BodySync", 
-      tech: "Python, MediaPipe, OpenCV, FLASK, HTML", 
+      tech: "Python, MediaPipe, OpenCV, Flask, HTML", 
       link: "https://github.com/davidshxm/BodySync",
       description: ["Computer vision software that analyzes posture and movement in real-time for physical therapy."],
       image: "/images/BodySync.png" 
@@ -75,113 +78,164 @@ export default function ProjectsPage() {
     },
   ];
 
-  // 2. Add the Smooth Scroll Function
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
-    e.preventDefault(); // Stop the default "jump"
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80; // Adjust this if the navbar covers the title
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
+  // 2. Extract all unique technologies from the projects array
+  const allTechs = useMemo(() => {
+    const techSet = new Set<string>();
+    projects.forEach((project) => {
+      // Split "Flutter, Flask" into individual tags and clean whitespace
+      project.tech.split(',').forEach((t) => techSet.add(t.trim()));
+    });
+    // Return sorted array of unique tags
+    return Array.from(techSet).sort();
+  }, [projects]);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  // 3. Filter the projects based on selection
+  const filteredProjects = useMemo(() => {
+    // If no filters selected, show all
+    if (selectedTechs.length === 0) return projects;
+
+    return projects.filter((project) => {
+      const projectTechs = project.tech.split(',').map((t) => t.trim());
+      // Check if project has AT LEAST ONE of the selected tags
+      return selectedTechs.some((selected) => projectTechs.includes(selected));
+    });
+  }, [projects, selectedTechs]);
+
+  // 4. Toggle function
+  const toggleTech = (tech: string) => {
+    setSelectedTechs((prev) =>
+      prev.includes(tech)
+        ? prev.filter((t) => t !== tech) // Remove if already selected
+        : [...prev, tech] // Add if not selected
+    );
   };
 
   return (
     <div id="projects" className="max-w-4xl mx-auto p-6 pt-20">
       
-      <h1 className="text-4xl font-bold mb-8 text-blue-500">Projects Portfolio</h1>
+      <div className="flex justify-between items-end mb-8">
+        <h1 className="text-4xl font-bold text-blue-500">Projects Portfolio</h1>
+        <span className="text-gray-500 text-sm">
+          Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'Project' : 'Projects'}
+        </span>
+      </div>
 
-      {/* --- Table of Contents --- */}
-      <nav className="mb-12 p-6 bg-gray-50 rounded-xl border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4 text-gray-700 uppercase tracking-wide">
-          Table of Contents
+      {/* --- Filter / Tags Section --- */}
+      <div className="mb-12 p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+        <h2 className="text-sm font-semibold mb-4 text-gray-500 uppercase tracking-wide">
+          Filter by Technology
         </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {projects.map((project) => (
-            <li key={project.id}>
-              <a 
-                href={`#${project.id}`} 
-                onClick={(e) => handleScroll(e, project.id)}
-                className="flex items-center text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-2 rounded transition-colors cursor-pointer"
-              >
-                <span className="mr-2">🔹</span> {project.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* --- Detailed Project List --- */}
-      <div className="space-y-16">
-        {projects.map((project) => (
-          <section 
-            key={project.id} 
-            id={project.id} 
-            className="scroll-mt-24 group" 
+        
+        <div className="flex flex-wrap gap-2">
+          {/* "All" Reset Button (Optional but good UX) */}
+          <button
+            onClick={() => setSelectedTechs([])}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border
+              ${selectedTechs.length === 0 
+                ? 'bg-gray-800 text-white border-gray-800' 
+                : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400'
+              }`}
           >
-            <div className="flex flex-col md:flex-row gap-8 border-b pb-12 border-gray-200">
-              
-              {/* Image Section*/}
-              {project.image ? (
-                <div className="w-full md:w-1/2 flex-shrink-0">
-                  <div className="overflow-hidden rounded-xl shadow-lg border border-gray-100">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.name} screenshot`} 
-                      className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-              ) : (
-                /* OPTIONAL: Render a placeholder if no image exists to keep layout consistent */
-                <div className="w-full md:w-1/2 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-xl h-64 border border-gray-200">
-                  <span className="text-gray-400 font-medium">No Image Available</span>
-                </div>
-              )}
+            All
+          </button>
 
-              {/* Text Section */}
-              <div className="w-full md:w-1/2 flex flex-col justify-center">
-                <h3 className="text-3xl font-bold text-blue-400 mb-3">
-                  {project.name}
-                </h3>
+          {/* Dynamic Tag Buttons */}
+          {allTechs.map((tech) => {
+            const isSelected = selectedTechs.includes(tech);
+            return (
+              <button
+                key={tech}
+                onClick={() => toggleTech(tech)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border
+                  ${isSelected
+                    ? 'bg-blue-500 text-white border-blue-500 shadow-md transform scale-105'
+                    : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300'
+                  }`}
+              >
+                {tech}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* --- Filtered Project List --- */}
+      <div className="space-y-16 min-h-[500px]">
+        {filteredProjects.length > 0 ? (
+          filteredProjects.map((project) => (
+            <section 
+              key={project.id} 
+              id={project.id} 
+              // Added generic animation classes for smooth filtering appearance
+              className="group animate-in fade-in slide-in-from-bottom-4 duration-500" 
+            >
+              <div className="flex flex-col md:flex-row gap-8 border-b pb-12 border-gray-200">
                 
-                <div className="mb-4">
-                  <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">
-                    {project.tech}
-                  </span>
+                {/* Image Section*/}
+                {project.image ? (
+                  <div className="w-full md:w-1/2 flex-shrink-0">
+                    <div className="overflow-hidden rounded-xl shadow-lg border border-gray-100">
+                      <img 
+                        src={project.image} 
+                        alt={`${project.name} screenshot`} 
+                        className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-full md:w-1/2 flex-shrink-0 flex items-center justify-center bg-gray-100 rounded-xl h-64 border border-gray-200">
+                    <span className="text-gray-400 font-medium">No Image Available</span>
+                  </div>
+                )}
+
+                {/* Text Section */}
+                <div className="w-full md:w-1/2 flex flex-col justify-center">
+                  <h3 className="text-3xl font-bold text-blue-400 mb-3">
+                    {project.name}
+                  </h3>
+                  
+                  <div className="mb-4">
+                    <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">
+                      {project.tech}
+                    </span>
+                  </div>
+
+                  <ul className="list-disc pl-5 space-y-2 text-gray-300 mb-6 leading-relaxed">
+                    {project.description.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
+
+                  <div>
+                    <a 
+                      href={project.link} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-md"
+                    >
+                      View Project 
+                      <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
+                  </div>
+
                 </div>
-
-                <ul className="list-disc pl-5 space-y-2 text-gray-300 mb-6 leading-relaxed">
-                  {project.description.map((point, index) => (
-                    <li key={index}>{point}</li>
-                  ))}
-                </ul>
-
-                <div>
-                  <a 
-                    href={project.link} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition-colors shadow-md"
-                  >
-                    View Project 
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </a>
-                </div>
-
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))
+        ) : (
+          /* Empty State if filter yields no results (unlikely with OR logic, but good safety) */
+          <div className="text-center py-20 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+            <p className="text-gray-500 text-lg">No projects match the selected filters.</p>
+            <button 
+              onClick={() => setSelectedTechs([])}
+              className="mt-4 text-blue-500 hover:text-blue-700 font-medium"
+            >
+              Clear all filters
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

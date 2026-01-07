@@ -61,8 +61,7 @@ export default function ContactPage() {
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Send me a message</h3>
             
             <form 
-              // IMPORTANT: Replace this URL with your own from Formspree.io later
-              action="https://formspree.io/f/YOUR_FORM_ID" 
+              action="https://formspree.io/f/mykzrggj" 
               method="POST"
               className="space-y-6"
             >
