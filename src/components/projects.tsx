@@ -114,7 +114,7 @@ export default function ProjectsPage() {
     <div id="projects" className="max-w-4xl mx-auto p-6 pt-20">
       
       <div className="flex justify-between items-end mb-8">
-        <h1 className="text-4xl font-bold text-blue-500">Projects Portfolio</h1>
+        <h1 className="text-4xl font-bold text-blue-500">Projects</h1>
         <span className="text-gray-500 text-sm">
           Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'Project' : 'Projects'}
         </span>

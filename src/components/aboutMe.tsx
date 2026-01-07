@@ -1,3 +1,5 @@
+import profile from 'public/DavidShim.jpeg';
+import Image from "next/image"; // <--- No curly braces
 export default function AboutMe() {
   return (
     <section id="about" className="py-20 bg-white">
@@ -15,10 +17,10 @@ export default function AboutMe() {
             <div className="absolute inset-0 bg-blue-100 rounded-full transform translate-x-3 translate-y-3"></div>
             
             {/* ACTUAL IMAGE (Add this) */}
-            <img 
-              src="/images/DavidShim.jpeg" 
-              alt="David" 
-              className="relative w-full h-full object-cover rounded-full border-4 border-white shadow-sm"
+            <Image
+              src={profile}
+              alt="David's Profile"
+              placeholder="blur" // Adds a cool blur effect while loading
             />
           </div>
 
@@ -29,12 +31,11 @@ export default function AboutMe() {
             </h3>
             
             <p className="text-gray-600 leading-relaxed mb-6">
-              I am a developer focused on bridging the gap between software and the 
-              physical world. Leveraging my background in Biomedical Engineering, 
-              I specialize in full-stack development and hardware integration from 
-              computer vision to IoT. I am particularly driven to apply these skills 
-              within the Neurotech industry and welcome connections with anyone 
-              innovating in that space.
+              I am a developer passionate about bridging the gap between software and the physical world. 
+              By combining a background in Biomedical Engineering with Full-Stack expertise, I build tools
+              that don't just run on a screen, but impact real lives. I am currently focused on Medical AI 
+              and Neural Engineering, while sharpening my skills in CAD and Machine Learning. I’m eager to 
+              join an R&D or engineering team tackling complex challenges in health-tech or backend systems.
             </p>
 
             <p className="text-gray-600 leading-relaxed mb-6">
@@ -57,14 +58,11 @@ export default function AboutMe() {
 
             {/* 4. Social Links */}
             <div className="mt-8 flex justify-center md:justify-start gap-4">
-              <a href="#" className="text-gray-600 hover:text-blue-600 font-medium underline">
+              <a href="https://www.linkedin.com/in/david-shim/" className="text-gray-600 hover:text-blue-600 font-medium underline">
                 LinkedIn
               </a>
-              <a href="#" className="text-gray-600 hover:text-black font-medium underline">
+              <a href="https://github.com/davidshxm" className="text-gray-600 hover:text-black font-medium underline">
                 GitHub
-              </a>
-              <a href="mailto:your@email.com" className="text-gray-600 hover:text-red-500 font-medium underline">
-                Email Me
               </a>
             </div>
           </div>

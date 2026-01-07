@@ -34,7 +34,7 @@ export default function NavBar() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-xl font-bold text-gray-800 tracking-tight"
             >
-              My<span className="text-blue-600">Portfolio</span>
+              David<span className="text-blue-600">Shim</span>
             </a>
           </div>
 
