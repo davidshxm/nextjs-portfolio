@@ -50,9 +50,12 @@ export default function NavBar() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 setIsMobileMenuOpen(false);
               }}
-              className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight hover:text-blue-600 transition-colors"
+              className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight hover:text-purple-600 transition-colors flex items-center gap-2"
             >
-              David<span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Shim</span>
+              <svg className="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+              </svg>
+              David<span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 bg-clip-text text-transparent">Shim</span>
             </a>
           </div>
 
@@ -61,26 +64,26 @@ export default function NavBar() {
             <a 
               href="#about" 
               onClick={(e) => handleScroll(e, 'about')}
-              className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 relative group"
+              className="px-4 py-2 text-gray-800 hover:text-purple-700 font-medium transition-colors rounded-lg hover:bg-purple-50 relative group"
             >
               About
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-600 to-amber-600 group-hover:w-full transition-all duration-300"></span>
             </a>
             <a 
               href="#projects" 
               onClick={(e) => handleScroll(e, 'projects')}
-              className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 relative group"
+              className="px-4 py-2 text-gray-800 hover:text-indigo-700 font-medium transition-colors rounded-lg hover:bg-indigo-50 relative group"
             >
               Projects
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
             </a>
             <a 
               href="#contact" 
               onClick={(e) => handleScroll(e, 'contact')}
-              className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors rounded-lg hover:bg-blue-50 relative group"
+              className="px-4 py-2 text-gray-800 hover:text-amber-700 font-medium transition-colors rounded-lg hover:bg-amber-50 relative group"
             >
               Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
             </a>
           </div>
 
@@ -107,21 +110,21 @@ export default function NavBar() {
               <a 
                 href="#about" 
                 onClick={(e) => handleScroll(e, 'about')}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-800 hover:text-purple-700 hover:bg-purple-50 font-medium transition-colors rounded-lg"
               >
                 About
               </a>
               <a 
                 href="#projects" 
                 onClick={(e) => handleScroll(e, 'projects')}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-800 hover:text-indigo-700 hover:bg-indigo-50 font-medium transition-colors rounded-lg"
               >
                 Projects
               </a>
               <a 
                 href="#contact" 
                 onClick={(e) => handleScroll(e, 'contact')}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 font-medium transition-colors rounded-lg"
+                className="px-4 py-3 text-gray-800 hover:text-amber-700 hover:bg-amber-50 font-medium transition-colors rounded-lg"
               >
                 Contact
               </a>

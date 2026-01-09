@@ -2,13 +2,33 @@ import React from 'react';
 
 export default function ContactPage() {
   return (
-    <section id="contact" className="py-20 md:py-32 px-6 bg-gradient-to-b from-gray-50/50 to-white">
-      <div className="max-w-6xl mx-auto">
+    <section id="contact" className="py-20 md:py-32 px-6 bg-gradient-to-b from-purple-50/50 via-indigo-50/30 to-amber-50/40 relative overflow-hidden">
+      {/* Musical decorative elements */}
+      <div className="absolute top-20 left-10 text-purple-200/40 animate-float">
+        <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </svg>
+      </div>
+      <div className="absolute bottom-28 right-16 text-amber-200/40 animate-float" style={{ animationDelay: '1.3s' }}>
+        <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </svg>
+      </div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-4"></div>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <svg className="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            </svg>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Get In <span className="bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 bg-clip-text text-transparent">Touch</span>
+            </h2>
+            <svg className="w-8 h-8 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+            </svg>
+          </div>
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 mx-auto rounded-full mb-4"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             I&apos;m currently looking for new opportunities. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!
           </p>
@@ -17,7 +37,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
           
           {/* LEFT SIDE: Socials & Info */}
-          <div className="p-10 md:p-12 bg-gradient-to-br from-blue-600 via-blue-700 to-purple-600 text-white flex flex-col justify-between relative overflow-hidden">
+          <div className="p-10 md:p-12 bg-gradient-to-br from-purple-600 via-indigo-600 to-amber-600 text-white flex flex-col justify-between relative overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
@@ -88,7 +108,7 @@ export default function ContactPage() {
                   id="email"
                   required
                   placeholder="john@example.com"
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-gray-200 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-gray-200 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition-all"
                 />
               </div>
 
@@ -102,13 +122,13 @@ export default function ContactPage() {
                   required
                   rows={5}
                   placeholder="Write your message here..."
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-gray-200 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border-2 border-gray-200 focus:border-purple-500 focus:bg-white focus:ring-2 focus:ring-purple-200 outline-none transition-all resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 hover:from-purple-700 hover:via-indigo-700 hover:to-amber-700 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 Send Message
               </button>
