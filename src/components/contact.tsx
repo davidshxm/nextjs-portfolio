@@ -66,7 +66,7 @@ export default function ContactPage() {
 
                 {/* Instagram */}
                 <a 
-                  href="https://www.instagram.com/david.shxm?igsh=MTJhMHBmbjNwYzNubQ%3D%3D&utm_source=qr" 
+                  href="https://www.instagram.com/guitar_shxms?igsh=aG14dHB0eHRyMnZp&utm_source=qr" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-4 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-pink-600 transition-all duration-300 transform hover:scale-110 shadow-lg"
